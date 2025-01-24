@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .registration-form {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 10px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .registration-form label {
+            text-align: right;
+            align-self: center;
+            padding-right: 10px;
+        }
+        .registration-form input {
+            width: 100%;
+            padding: 5px;
+        }
+        .form-actions {
+            grid-column: 2 / 3;
+            text-align: right;
+            margin-top: 20px;
+        }
+        .message {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Регистрация</h1>
+
+    <div class="message">
+        {% if info.success %}
+            <p class="success">{{ info.success }}</p>
+        {% endif %}
+        {% if info.error %}
+            <p class="error">{{ info.error }}</p>
+        {% endif %}
+    </div>
+
+    {% if not info.success %}
+        <form method="post" class="registration-form">
+            {% csrf_token %}
+            <label for="username">Введите логин:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Введите пароль:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="repeat_password">Повторите пароль:</label>
+            <input type="password" id="repeat_password" name="repeat_password" required>
+
+            <label for="age">Введите свой возраст:</label>
+            <input type="number" id="age" name="age" required>
+
+            <div class="form-actions">
+                <button type="submit">Зарегистрироваться</button>
+            </div>
+        </form>
+    {% endif %}
+</body>
+</html>
